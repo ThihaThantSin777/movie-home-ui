@@ -43,15 +43,17 @@ class MovieCardItemView extends StatelessWidget {
 }
 
 class MovieTitleItemView extends StatelessWidget {
-  const MovieTitleItemView({
-    Key? key,
-    required this.movieTitle,
-    required this.movieRunTime,
-    required this.movieVote,
-  }) : super(key: key);
+  const MovieTitleItemView(
+      {Key? key,
+      required this.movieTitle,
+      required this.movieRunTime,
+      required this.movieVote,
+      required this.onTap})
+      : super(key: key);
   final String movieTitle;
   final String movieRunTime;
   final String movieVote;
+  final Function onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -77,10 +79,13 @@ class MovieTitleItemView extends StatelessWidget {
           const SizedBox(
             height: kSP10x,
           ),
-          const Icon(
-            Icons.play_circle,
-            size: kPlayButtonIconSize,
-            color: kWhiteColor,
+          IconButton(
+            onPressed: () =>onTap(),
+            icon: const Icon(
+              Icons.play_circle,
+              size: kPlayButtonIconSize,
+              color: kWhiteColor,
+            ),
           )
         ],
       ),

@@ -3,9 +3,10 @@ import 'package:movie_home_app_ui/constant/colors.dart';
 import 'package:movie_home_app_ui/constant/dimens.dart';
 import 'package:movie_home_app_ui/utlis/assets_images.dart';
 import 'package:movie_home_app_ui/view_items/home_page_view_items.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 ///Image Link POC
-final List<String>movieURL=[
+final List<String> movieURL = [
   'https://image.tmdb.org/t/p/original/1BIoJGKbXjdFDAqUEiA2VHqkK1Z.jpg',
   'https://pbs.twimg.com/media/DyomVLqX0AA2iOV?format=jpg',
   'https://m.media-amazon.com/images/I/71krfsS5kNL.jpg',
@@ -14,6 +15,7 @@ final List<String>movieURL=[
   'https://m.media-amazon.com/images/I/51V0Mw23gmL._AC_.jpg',
   'https://lumiere-a.akamaihd.net/v1/images/p_avengersendgame_19751_e14a0104.jpeg'
 ];
+
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -52,13 +54,24 @@ class HomePage extends StatelessWidget {
           ),
 
           ///Movie Title and Runtime/Vote Section
-          const Positioned(
+          Positioned(
               top: kMovieTitleTopPosition,
               right: kMovieTitleRightPosition,
               child: MovieTitleItemView(
                 movieTitle: 'Spider Man- No Way Home (2021)',
                 movieRunTime: '2 hours 28 minutes',
                 movieVote: '200 votes',
+                onTap: () async{
+                  if (await canLaunchUrl(
+                      Uri.parse('https://youtu.be/JfVOs4VSpmA'))) {
+                    launchUrl(
+                      Uri.parse('https://youtu.be/JfVOs4VSpmA'),
+                      mode: LaunchMode.externalApplication,
+                    );
+                  } else {
+                    print('URL In Correct');
+                  }
+                },
               )),
 
           ///Bottom Movie Card Section
@@ -73,5 +86,3 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-
-
